@@ -11,7 +11,9 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 var modelPart = module {
     factory {
-        DataModelImpl()
+        DataModelImpl(
+            get()
+        )
     }
 }
 

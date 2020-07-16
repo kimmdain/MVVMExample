@@ -1,11 +1,9 @@
 package com.example.mvvmexample.model
 
-interface DataModel {
-    fun getData()
-}
+import com.example.mvvmexample.model.enum.KakaoSearchSortEnum
+import com.example.mvvmexample.model.response.ImageSearchResponse
+import io.reactivex.Single
 
-class DataModelImpl: DataModel{
-    override fun getData() {
-        return
-    }
+interface DataModel {
+    fun getData(query:String, sort: KakaoSearchSortEnum, page:Int, size:Int): Single<ImageSearchResponse>
 }
