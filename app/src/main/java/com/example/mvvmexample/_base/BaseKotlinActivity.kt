@@ -54,6 +54,7 @@ abstract class BaseKotlinActivity<T : ViewDataBinding, R : BaseKotlinViewModel> 
         super.onCreate(savedInstanceState)
 
         viewDataBinding = DataBindingUtil.setContentView(this, layoutResourceId)
+        viewDataBinding.lifecycleOwner = this
 
         initStartView()
         initDataBinding()

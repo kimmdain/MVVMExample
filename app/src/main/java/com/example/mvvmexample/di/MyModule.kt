@@ -1,5 +1,7 @@
 package com.example.mvvmexample.di
 
+import com.example.mvvmexample.MainSearchRecyclerViewAdapter
+import com.example.mvvmexample.model.DataModel
 import com.example.mvvmexample.model.DataModelImpl
 import com.example.mvvmexample.model.service.KakaoSearchService
 import com.example.mvvmexample.viewmodel.MainViewModel
@@ -8,22 +10,6 @@ import org.koin.dsl.module.module
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
-
-var modelPart = module {
-    factory {
-        DataModelImpl(
-            get()
-        )
-    }
-}
-
-var viewModelPart = module {
-    viewModel {
-        MainViewModel(get())
-    }
-}
-
-var myDiModule = listOf(modelPart, viewModelPart)
 
 var retrofitPart = module {
     single<KakaoSearchService> {
@@ -35,3 +21,23 @@ var retrofitPart = module {
             .create(KakaoSearchService::class.java)
     }
 }
+
+var adapterPart = module {
+    factory {
+        MainSearchRecyclerViewAdapter()
+    }
+}
+
+var modelPart = module {
+    factory<DataModel> {
+        DataModelImpl(get())
+    }
+}
+
+var viewModelPart = module {
+    viewModel {
+        MainViewModel(get())
+    }
+}
+
+var myDiModule = listOf(retrofitPart, adapterPart, modelPart, viewModelPart)
